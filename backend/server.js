@@ -16,40 +16,30 @@ const app = express();
 connectDB();
 connectCloudinary();
 
-// //  Allowed origins for local + production
-// const allowedOrigins = [
-//   "https://lakshmi-project-frontend.vercel.app", // production frontend
-//   "https://lakshmi-project-admin.vercel.app",     // production admin
-//   "https://lakshmi-project-backend.vercel.app",     // production admin
-// ];
-
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//   allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With", "token","auth-token"],
-//   credentials: true
-// }));
-
-// // Handle preflight
-// app.options("*", cors());
-
-app.use(
-  smartcors({
- allowedOrigins : [
+//  Allowed origins for local + production
+const allowedOrigins = [
   "https://lakshmi-project-frontend.vercel.app", // production frontend
   "https://lakshmi-project-admin.vercel.app",     // production admin
   "https://lakshmi-project-backend.vercel.app",     // production admin
-],
-    allowCredentials: true,
-    debug: true,
-  })
-);
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With", "token","auth-token"],
+  credentials: true
+}));
+
+// Handle preflight
+app.options("*", cors());
+
+
 
 
 // Body parser
