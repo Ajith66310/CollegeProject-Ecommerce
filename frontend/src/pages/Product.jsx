@@ -29,6 +29,10 @@ const Product = () => {
     fetchProductData();
   }, [productId, products]);
 
+    useEffect(() => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}, [productId]);
+
   const [reviewText, setReviewText] = useState("");
 
   const handleSubmitReview = async () => {
